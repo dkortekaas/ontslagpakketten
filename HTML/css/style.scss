@@ -1,0 +1,23 @@
+/*
+
+Theme Name: Ontslagpakketten
+Description: Ontslagpakketten WordPress Theme.
+Version: 1.0.0
+Author: Weblogiq
+
+*/
+// Font
+$default-font: 'Proxima Nova Regular';
+$bold-font: 'Proxima Nova Extrabold';
+$semibold-font: 'Proxima Nova Semibold';
+$light-font: 'Proxima Nova Light';
+$script-font: 'Gochi Hand', cursive;
+
+$base-fontsize: 16px;
+
+// Imports
+@import "sass/normalize";
+@import "sass/mixins";
+@import "sass/colorscheme";
+@import "sass/fonts";
+@import "sass/theme";

@@ -1,0 +1,179 @@
+$useIEFilters: 0;
+
+// Border Radius
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+          border-radius: $radius;
+        background-clip: padding-box;
+}
+
+// Single Side Border Radius
+@mixin border-top-radius($radius) {
+  -webkit-border-top-right-radius: $radius;
+          border-top-right-radius: $radius;
+   -webkit-border-top-left-radius: $radius;
+           border-top-left-radius: $radius;
+                  background-clip: padding-box;
+}
+@mixin border-right-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+          border-bottom-right-radius: $radius;
+     -webkit-border-top-right-radius: $radius;
+             border-top-right-radius: $radius;
+                     background-clip: padding-box;
+}
+@mixin border-bottom-radius($radius) {
+  -webkit-border-bottom-right-radius: $radius;
+          border-bottom-right-radius: $radius;
+   -webkit-border-bottom-left-radius: $radius;
+           border-bottom-left-radius: $radius;
+                     background-clip: padding-box;
+}
+@mixin border-left-radius($radius) {
+    -webkit-border-bottom-left-radius: $radius;
+            border-bottom-left-radius: $radius;
+       -webkit-border-top-left-radius: $radius;
+               border-top-left-radius: $radius;
+                      background-clip: padding-box;
+}
+
+// Box Shadow
+@mixin box-shadow($value1, $value2, $value3, $value4) {
+  -webkit-box-shadow: $value1, $value2, $value3, $value4;
+          box-shadow: $value1, $value2, $value3, $value4;
+}
+
+// Single Box Shadow
+@mixin single-box-shadow($value) {
+  -webkit-box-shadow: $value;
+          box-shadow: $value;
+}
+
+// Borders
+@mixin bordered($top-color: 1px #EEE, $right-color: 1px #EEE, $bottom-color: 1px #EEE, $left-color: 1px #EEE) {
+     border-top: solid $top-color;
+    border-left: solid $left-color;
+   border-right: solid $right-color;
+  border-bottom: solid $bottom-color;
+}
+
+// Single border
+@mixin single-bordered($color: 1px #eee) {
+  border: solid $color;
+}
+
+// Gradient
+@mixin linear-gradients($from, $via, $to, $ie: $useIEFilters) {
+  @if $ie != 1 { background-color: $to; }
+  
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, $from),color-stop(0.44, $via),color-stop(1, $to));
+  background-image: -webkit-linear-gradient(top, $from, $via, $to);
+  background-image: -moz-linear-gradient(top, $from, $via, $to);
+  background-image: -ms-linear-gradient(top, $from, $via, $to);
+  background-image: -o-linear-gradient(top, $from, $via, $to);
+  background-image: linear-gradient(top, bottom, $from, $via, $to);
+
+  @if $ie == 1 { 
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}');
+    -ms-filter: quote(progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$from}', endColorstr='#{$to}'));
+  }
+}
+
+// Placeholder
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}  
+}
+
+// Retina Images
+@mixin img-retina($file-1x, $file-2x, $width-1x, $height-1x) {
+  background-image: url("#{$file-1x}");
+   background-size: $width-1x $height-1x;
+
+  @media
+  only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (   min--moz-device-pixel-ratio: 2),
+  only screen and (     -o-min-device-pixel-ratio: 2/1),
+  only screen and (        min-device-pixel-ratio: 2),
+  only screen and (                min-resolution: 192dpi),
+  only screen and (                min-resolution: 2dppx) {
+    background-image: url("#{$file-2x}");
+     background-size: $width-1x $height-1x;
+  }
+}
+
+// Opacity
+@mixin opacity($opacity) {
+      opacity: $opacity;
+  $opacity-ie: ($opacity * 100);
+       filter: #{alpha(opacity=$opacity-ie)};
+}
+
+// Font-face
+@mixin font-face($name, $font-files, $eot: false, $weight: false, $style: false) {
+  $iefont: unquote("#{$eot}?#iefix");
+  @font-face {
+    font-family: quote($name);
+    @if $eot {
+      src: font-url($eot);
+      $font-files: font-url($iefont) unquote("format('embedded-opentype')"), $font-files;
+    }
+    src: $font-files;
+    @if $weight {
+      font-weight: $weight;
+    }
+    @if $style {
+      font-style: $style;
+    }
+  }
+}
+
+// Text Overflow
+@mixin text-truncate {
+       overflow: hidden;
+  text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// Text Shadow
+@mixin text-shadow($string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
+  text-shadow: $string;
+}
+
+// Hiding Text and Image Replacement
+@mixin hide-text {
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+}
+
+// Transition
+@mixin transition($duration:0.2s, $ease:ease-out) {
+  -webkit-transition: all $duration $ease;
+     -moz-transition: all $duration $ease;
+       -o-transition: all $duration $ease;
+          transition: all $duration $ease;
+}
+
+// Absolute Positioned
+@mixin abs-pos ($top: auto, $right: auto, $bottom: auto, $left: auto) {
+       top: $top;
+     right: $right;
+    bottom: $bottom;
+      left: $left;
+  position: absolute;
+}
+
+// Rotate
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+     -moz-transform: rotate($deg + deg);
+       -o-transform: rotate($deg + deg);
+  -webkit-transform: rotate($deg + deg);
+      -ms-transform: rotate($deg + deg);
+          transform: rotate($deg + deg);
+             filter: progid:DXImageTransform.Microsoft.Matrix(
+                     M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod='auto expand');
+               zoom: 1;
+}
